@@ -1,0 +1,10 @@
+[package]
+name = "holochain_project"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# SOLO UNA di queste - probabilmente ti serve holochain_wind_tunnel_runner
+holochain_wind_tunnel_runner = { git = "https://github.com/holochain/wind-tunnel", rev = "b34bbc7" }
+tokio = { version = "1", features = ["full"] }
+anyhow = "1.0"
