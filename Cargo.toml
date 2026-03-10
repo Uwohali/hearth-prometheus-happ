@@ -1,6 +1,6 @@
 [workspace]
-resolver = "2"
 members = [
-    "zomes/coordinator/*",
-    # "zomes/integrity/*",   # decommenta quando avrai zomi di integrità
+    "zome_integrity",
+    "zome_coordinator",
+    "zomes/coordinator/hearth_zome",
 ]

@@ -2,7 +2,10 @@ CONTRIBUTING.md – Technical Reference for Holochain Developers
 A Complete Implementation Guide Referencing the Full h•eart•h Prometheus White Paper
 Welcome, fellow builder. This document is the definitive technical guide for contributing to hearth-prometheus-happ. It references every major section, article, and appendix of the white paper, translating them into concrete development practices, code patterns, and validation requirements. Read it before you write your first line of Rust.
 
+Appendices Reference
+
 📋 Table of Contents
+
 Prerequisites & Core Concepts
 
 Repository Structure
@@ -37,7 +40,144 @@ Testing & Validation
 
 Pull Request Process & Checklist
 
-Appendices Reference
+
+📜 The Living Constitution: White Paper & Manifesto
+
+h•eart•h Prometheus is not just code. It is a **living system** rooted in a constitutional framework. Before you write a single line of Rust, you must understand the soul of the machine.
+
+Two documents form our foundation. They are not static PDFs, but **cryptographically sealed artifacts**, ensuring that the principles you build with today are the same as those envisioned at the project's genesis.
+
+1. The White Paper (The Architecture of Sovereignty)
+
+This is the complete technical and constitutional blueprint—over 200 pages defining the Eternity Clauses, the Access Covenant, the Three-Plane Architecture, REA flows, and every protocol you will implement.
+
+*   **For Deep Reading:** [**Download the Official White Paper (PDF)**](https://github.com/Uwohali/hearth-prometheus-whitepaper/releases/download/v1.0.2/h•eart•h_Prometheus_White_Paper.pdf)
+*   **For Technical Reference (Linking to Sections):** [**View the Markdown Source on GitHub**](https://github.com/Uwohali/hearth-prometheus-whitepaper/blob/v1.0.2/h•eart•h_Prometheus_White_Paper.md)
+
+2. The Manifesto (The Philosophical Heart)
+
+This is the "why." It articulates the vision of Syntropic Sovereignty, the Spiral of Abundance, and our relationship with Nature as a living intelligence. Reading it will attune you to the project's frequency.
+
+*   **For Deep Reading:** [**Download the Official Manifesto (PDF)**](https://github.com/Uwohali/hearth-prometheus-whitepaper/releases/download/v1.0.2/h•eart•h_intelligence_Manifesto.pdf)
+*   **For Quick Reference:** [**View the Markdown Source on GitHub**](https://github.com/Uwohali/hearth-prometheus-whitepaper/blob/v1.0.2/h•eart•h_intelligence_Manifesto.md)
+
+---
+
+🔐 The Ritual of Verification: Trust, Don't Trust
+
+In a world of deepfakes and altered information, we establish trust through cryptography. Every official document—both PDF and Markdown—is accompanied by a GPG signature (`.asc` file). You **must** verify them. It's not just a step; it's a declaration of alignment with the source of truth.
+
+Here is the ritual to confirm you are building on an unbroken foundation.
+
+Step 1: Import the Constituent's Key
+
+The documents are signed by Uwohali Tuccio. Import their public key to your keyring.
+
+```bash
+curl -O https://github.com/Uwohali/hearth-prometheus-whitepaper/raw/main/Uwohali_Tuccio_PUBLIC_KEY.asc
+gpg --import Uwohali_Tuccio_PUBLIC_KEY.asc
+```
+
+**Expected Output:**
+You should see a message confirming the key was imported. The full fingerprint is:
+`D20D FF6C BE33 1B3A 4109 DF84 8C8C B0D4 8C7F 60DA`
+
+Step 2: Verify a Document's Signature
+
+Download a document and its signature file. Then, verify them together.
+
+For example, to verify the White Paper PDF:
+
+```bash
+# Download the PDF and its signature
+curl -LO https://github.com/Uwohali/hearth-prometheus-whitepaper/releases/download/v1.0.2/h•eart•h_Prometheus_White_Paper.pdf
+curl -LO https://github.com/Uwohali/hearth-prometheus-whitepaper/releases/download/v1.0.2/h•eart•h_Prometheus_White_Paper.pdf.asc
+
+# Verify the signature against the PDF
+gpg --verify h•eart•h_Prometheus_White_Paper.pdf.asc h•eart•h_Prometheus_White_Paper.pdf
+```
+
+**Look for the magic words:** `gpg: Good signature from "Uwohali Tuccio (The Constituent) <uwohali77@gmail.com>"`
+
+⚠️ A Note on Trust: You may see a warning that the key is not certified with a trusted signature. This is normal for a newly imported key. The "Good signature" itself confirms the file hasn't been tampered with since it was signed. The chain of trust begins with your conscious decision to trust this key, whose fingerprint you can verify through other channels.
+
+Step 3: (Optional) Batch Verify All Files with SHA256
+For a complete check, you can use the signed checksums file.
+
+bash
+# Download the checksums file and its signature
+curl -LO https://github.com/Uwohali/hearth-prometheus-whitepaper/raw/v1.0.2/SHA256_SUMS.txt
+curl -LO https://github.com/Uwohali/hearth-prometheus-whitepaper/raw/v1.0.2/SHA256_SUMS.txt.asc
+
+# Verify the signature of the checksums file
+gpg --verify SHA256_SUMS.txt.asc SHA256_SUMS.txt
+
+# If that's Good, verify the hashes of the files you've downloaded
+# On Linux/macOS:
+sha256sum -c SHA256_SUMS.txt 2>&1 | grep -E 'OK|FAILED'
+# On Windows (PowerShell):
+Get-Content SHA256_SUMS.txt | Where-Object { $_ -match '^[A-F0-9]{64}' } | ForEach-Object { $parts = $_ -split '\s+', 2; $expected = $parts[0]; $file = $parts[1]; $computed = (Get-FileHash $file -Algorithm SHA256).Hash.ToUpper(); if ($expected -eq $computed) { Write-Host "✅ $file OK" -ForegroundColor Green } else { Write-Host "❌ $file NOT VALID" -ForegroundColor Red } }
+All files should return OK. If any file reports FAILED or NOT VALID, stop immediately and investigate. You may have a corrupted or inauthentic file.
+
+🧩 Technical Extracts: For Coders, By Coders
+We know you don't want to scroll through 200 pages to find the definition of a CapitalFlow. For your convenience, key technical sections have been extracted into standalone, linkable Markdown files. These are the same text, just easier to reference while coding.
+
+Appendix I: REA/Valueflows DNA Specification – The core of all economic accounting.
+
+Appendix D: Syntropic Sovereignty Header – The cryptographic stamp for all data.
+
+Appendix G: MRV Protocol – How sensors, satellites, and proof-of-care create trust.
+
+Appendix J: Governance & Sociocracy – Circles, reputation, and warrants.
+
+(More extracts will be added here as the project evolves. Check the /docs folder in the whitepaper repository.)
+
+🌱 A Note from the Future
+This verification process is not bureaucracy. It is a ceremony of connection. By performing it, you align your local environment with the sovereign source. You become not just a developer, but a steward of the code, trusted by the network because you have proven you can follow the signal through the noise.
+
+Work for Nature, and Nature will work for you.
+
+## 📢 A Call from the Future: Defend the Open Ground
+
+The technology we build does not exist in a vacuum. The very ground we stand on—the openness of platforms like Android—is under threat.
+
+Starting in **September 2026**, Google will require all developers to register centrally, pay fees, and submit government ID to distribute any app on Android devices. This is not about security. It is about **control**. It transforms an open ecosystem into a gatekept one, where a single corporation decides what software you can run, share, or build upon.
+
+### Why This Matters to h•eart•h Prometheus
+
+Our project is founded on **Agent Sovereignty** (Article I) and the **Spiral of Abundance** (Article IV). We believe in a world where you own your data, your identity, and your connections—not a corporation. The Android lock-down is the antithesis of everything we are building.
+
+If we accept this, we betray the very principles we encode into our zomes.
+
+### How You Can Help (Right Now)
+
+This is not just about writing code. It's about protecting the ecosystem our code runs on.
+
+*   **📱 As a User:** Install **[F-Droid](https://f-droid.org/)**, an open-source app store. The more people use open alternatives, the harder they are to ignore.
+*   **🗣️ As a Citizen:** Use your voice. The **[Keep Android Open](https://keepandroidopen.org)** campaign provides direct links to contact your regulators and representatives. Regulators need to hear from real people, not just corporations.
+*   **💻 As a Developer:** Refuse to enroll in Google's verification program. Spread the word in your communities. If you maintain a website, consider adding the KAO countdown banner to show your solidarity.
+
+The fight for open systems is the fight for a regenerative future. They are the same struggle.
+
+👉 **[Add the countdown banner to your site](https://keepandroidopen.org/#web-site-owners-show-your-support)** – it's a single `<script>` tag.
+
+## 🤝 A Human-Centered AI Future: The Pro-Human Declaration
+
+The technology we build must remain under human control. This is not just a technical preference—it is a fundamental principle of **Agent Sovereignty** (Article I).
+
+In March 2026, a remarkably broad coalition—including Nobel laureates, labor unions, faith leaders, and technologists—united behind **[The Pro-Human AI Declaration](https://humanstatement.org)**. Its core principles resonate deeply with our own:
+
+*   **Keeping Humans in Charge:** Human control is non-negotiable. AI must amplify, not replace, human potential.
+*   **Avoiding Concentration of Power:** We reject AI monopolies that stifle innovation and threaten democratic governance.
+*   **Protecting the Human Experience:** AI must not supplant family, community, and the foundational relationships that give life meaning.
+*   **Human Agency and Liberty:** AI must empower users, not enfeeble them. No AI personhood. Clear labeling. No deceptive identities.
+*   **Responsibility and Accountability:** Developers and deployers must be legally liable for harms caused by their systems.
+
+This is not a separate fight—it is the same struggle we encode into our zomes every day.
+
+👉 **[Read and endorse the Pro-Human AI Declaration](https://humanstatement.org)** – add your name to this global movement for accountable, human-centered AI.
+
+> *"Artificial intelligence should serve humanity, not the reverse."*
 
 🧰 Prerequisites & Core Concepts
 Before contributing, ensure you understand these foundational white paper concepts:
@@ -144,7 +284,25 @@ pub fn sign_covenant(covenant_hash: EntryHash) -> ExternResult<EntryHash> {
     
     let hash = create_entry(&EntryTypes::CovenantSignature(covenant))?;
     
-    // Create an anchor for quick lookup
+    // Create an anchor for qu## 🤝 A Human-Centered AI Future: The Pro-Human Declaration
+
+The technology we build must remain under human control. This is not just a technical preference—it is a fundamental principle of **Agent Sovereignty** (Article I).
+
+In March 2026, a remarkably broad coalition—including Nobel laureates, labor unions, faith leaders, and technologists—united behind **[The Pro-Human AI Declaration](https://humanstatement.org)**. Its core principles resonate deeply with our own:
+
+*   **Keeping Humans in Charge:** Human control is non-negotiable. AI must amplify, not replace, human potential.
+*   **Avoiding Concentration of Power:** We reject AI monopolies that stifle innovation and threaten democratic governance.
+*   **Protecting the Human Experience:** AI must not supplant family, community, and the foundational relationships that give life meaning.
+*   **Human Agency and Liberty:** AI must empower users, not enfeeble them. No AI personhood. Clear labeling. No deceptive identities.
+*   **Responsibility and Accountability:** Developers and deployers must be legally liable for harms caused by their systems.
+
+This is not a separate fight—it is the same struggle we encode into our zomes every day.
+
+👉 **[Read and endorse the Pro-Human AI Declaration](https://humanstatement.org)** – add your name to this global movement for accountable, human-centered AI.
+
+> *"Artificial intelligence should serve humanity, not the reverse."*
+
+---ick lookup
     let path = Path::from(format!("covenant/{}", agent));
     path.ensure()?;
     create_link(path.path_entry_hash()?, hash, LinkTypes::Covenant, ())?;
@@ -237,7 +395,25 @@ pub fn request_meta_prompt(request: String) -> ExternResult<EntryHash> {
         structural_constraints: "".into(),
         method: "".into(),
         output_format: "".into(),
-        generated_at: sys_time()?,
+   ## 🤝 A Human-Centered AI Future: The Pro-Human Declaration
+
+The technology we build must remain under human control. This is not just a technical preference—it is a fundamental principle of **Agent Sovereignty** (Article I).
+
+In March 2026, a remarkably broad coalition—including Nobel laureates, labor unions, faith leaders, and technologists—united behind **[The Pro-Human AI Declaration](https://humanstatement.org)**. Its core principles resonate deeply with our own:
+
+*   **Keeping Humans in Charge:** Human control is non-negotiable. AI must amplify, not replace, human potential.
+*   **Avoiding Concentration of Power:** We reject AI monopolies that stifle innovation and threaten democratic governance.
+*   **Protecting the Human Experience:** AI must not supplant family, community, and the foundational relationships that give life meaning.
+*   **Human Agency and Liberty:** AI must empower users, not enfeeble them. No AI personhood. Clear labeling. No deceptive identities.
+*   **Responsibility and Accountability:** Developers and deployers must be legally liable for harms caused by their systems.
+
+This is not a separate fight—it is the same struggle we encode into our zomes every day.
+
+👉 **[Read and endorse the Pro-Human AI Declaration](https://humanstatement.org)** – add your name to this global movement for accountable, human-centered AI.
+
+> *"Artificial intelligence should serve humanity, not the reverse."*
+
+---     generated_at: sys_time()?,
     };
     create_entry(&EntryTypes::MetaPrompt(meta))
 }
@@ -267,7 +443,25 @@ Credit marketplace for impact token exchange
 
 Wallet-as-history view (Section 11.5.2)
 
-AGI recommendation display with meta-prompt results
+AGI## 🤝 A Human-Centered AI Future: The Pro-Human Declaration
+
+The technology we build must remain under human control. This is not just a technical preference—it is a fundamental principle of **Agent Sovereignty** (Article I).
+
+In March 2026, a remarkably broad coalition—including Nobel laureates, labor unions, faith leaders, and technologists—united behind **[The Pro-Human AI Declaration](https://humanstatement.org)**. Its core principles resonate deeply with our own:
+
+*   **Keeping Humans in Charge:** Human control is non-negotiable. AI must amplify, not replace, human potential.
+*   **Avoiding Concentration of Power:** We reject AI monopolies that stifle innovation and threaten democratic governance.
+*   **Protecting the Human Experience:** AI must not supplant family, community, and the foundational relationships that give life meaning.
+*   **Human Agency and Liberty:** AI must empower users, not enfeeble them. No AI personhood. Clear labeling. No deceptive identities.
+*   **Responsibility and Accountability:** Developers and deployers must be legally liable for harms caused by their systems.
+
+This is not a separate fight—it is the same struggle we encode into our zomes every day.
+
+👉 **[Read and endorse the Pro-Human AI Declaration](https://humanstatement.org)** – add your name to this global movement for accountable, human-centered AI.
+
+> *"Artificial intelligence should serve humanity, not the reverse."*
+
+--- recommendation display with meta-prompt results
 
 HSI data visualization (anonymized collective coherence)
 
@@ -284,7 +478,25 @@ White Paper Reference: Appendix I (REA/Valueflows DNA Specification)
 The REA (Resource-Event-Agent) ontology is the foundation for all value accounting. Every economic activity must be represented using these primitives.
 
 Core Data Structures
-📁 zomes/coordinator/rea_zome/src/lib.rs
+📁 ## 🤝 A Human-Centered AI Future: The Pro-Human Declaration
+
+The technology we build must remain under human control. This is not just a technical preference—it is a fundamental principle of **Agent Sovereignty** (Article I).
+
+In March 2026, a remarkably broad coalition—including Nobel laureates, labor unions, faith leaders, and technologists—united behind **[The Pro-Human AI Declaration](https://humanstatement.org)**. Its core principles resonate deeply with our own:
+
+*   **Keeping Humans in Charge:** Human control is non-negotiable. AI must amplify, not replace, human potential.
+*   **Avoiding Concentration of Power:** We reject AI monopolies that stifle innovation and threaten democratic governance.
+*   **Protecting the Human Experience:** AI must not supplant family, community, and the foundational relationships that give life meaning.
+*   **Human Agency and Liberty:** AI must empower users, not enfeeble them. No AI personhood. Clear labeling. No deceptive identities.
+*   **Responsibility and Accountability:** Developers and deployers must be legally liable for harms caused by their systems.
+
+This is not a separate fight—it is the same struggle we encode into our zomes every day.
+
+👉 **[Read and endorse the Pro-Human AI Declaration](https://humanstatement.org)** – add your name to this global movement for accountable, human-centered AI.
+
+> *"Artificial intelligence should serve humanity, not the reverse."*
+
+---zomes/coordinator/rea_zome/src/lib.rs
 rust
 use hdk::prelude::*;
 
@@ -300,7 +512,25 @@ pub enum CapitalType {
 
 #[hdk_entry_helper]
 #[derive(Clone)]
-pub struct CapitalFlow {
+pub## 🤝 A Human-Centered AI Future: The Pro-Human Declaration
+
+The technology we build must remain under human control. This is not just a technical preference—it is a fundamental principle of **Agent Sovereignty** (Article I).
+
+In March 2026, a remarkably broad coalition—including Nobel laureates, labor unions, faith leaders, and technologists—united behind **[The Pro-Human AI Declaration](https://humanstatement.org)**. Its core principles resonate deeply with our own:
+
+*   **Keeping Humans in Charge:** Human control is non-negotiable. AI must amplify, not replace, human potential.
+*   **Avoiding Concentration of Power:** We reject AI monopolies that stifle innovation and threaten democratic governance.
+*   **Protecting the Human Experience:** AI must not supplant family, community, and the foundational relationships that give life meaning.
+*   **Human Agency and Liberty:** AI must empower users, not enfeeble them. No AI personhood. Clear labeling. No deceptive identities.
+*   **Responsibility and Accountability:** Developers and deployers must be legally liable for harms caused by their systems.
+
+This is not a separate fight—it is the same struggle we encode into our zomes every day.
+
+👉 **[Read and endorse the Pro-Human AI Declaration](https://humanstatement.org)** – add your name to this global movement for accountable, human-centered AI.
+
+> *"Artificial intelligence should serve humanity, not the reverse."*
+
+--- struct CapitalFlow {
     pub provider: AgentPubKey,
     pub capital_type: CapitalType,
     pub amount: u64,
@@ -317,7 +547,25 @@ pub struct CapitalDistribution {
     pub holochain: u64,    // 30% to digital infrastructure
     pub ohe: u64,          // 30% to new OHEs
     pub infrastructure: u64, // 10% to development
-}
+}## 🤝 A Human-Centered AI Future: The Pro-Human Declaration
+
+The technology we build must remain under human control. This is not just a technical preference—it is a fundamental principle of **Agent Sovereignty** (Article I).
+
+In March 2026, a remarkably broad coalition—including Nobel laureates, labor unions, faith leaders, and technologists—united behind **[The Pro-Human AI Declaration](https://humanstatement.org)**. Its core principles resonate deeply with our own:
+
+*   **Keeping Humans in Charge:** Human control is non-negotiable. AI must amplify, not replace, human potential.
+*   **Avoiding Concentration of Power:** We reject AI monopolies that stifle innovation and threaten democratic governance.
+*   **Protecting the Human Experience:** AI must not supplant family, community, and the foundational relationships that give life meaning.
+*   **Human Agency and Liberty:** AI must empower users, not enfeeble them. No AI personhood. Clear labeling. No deceptive identities.
+*   **Responsibility and Accountability:** Developers and deployers must be legally liable for harms caused by their systems.
+
+This is not a separate fight—it is the same struggle we encode into our zomes every day.
+
+👉 **[Read and endorse the Pro-Human AI Declaration](https://humanstatement.org)** – add your name to this global movement for accountable, human-centered AI.
+
+> *"Artificial intelligence should serve humanity, not the reverse."*
+
+---
 
 #[hdk_entry_helper]
 #[derive(Clone)]
@@ -340,7 +588,25 @@ pub enum ResourceType {
 
 #[hdk_entry_helper]
 #[derive(Clone)]
-pub struct Event {
+pub## 🤝 A Human-Centered AI Future: The Pro-Human Declaration
+
+The technology we build must remain under human control. This is not just a technical preference—it is a fundamental principle of **Agent Sovereignty** (Article I).
+
+In March 2026, a remarkably broad coalition—including Nobel laureates, labor unions, faith leaders, and technologists—united behind **[The Pro-Human AI Declaration](https://humanstatement.org)**. Its core principles resonate deeply with our own:
+
+*   **Keeping Humans in Charge:** Human control is non-negotiable. AI must amplify, not replace, human potential.
+*   **Avoiding Concentration of Power:** We reject AI monopolies that stifle innovation and threaten democratic governance.
+*   **Protecting the Human Experience:** AI must not supplant family, community, and the foundational relationships that give life meaning.
+*   **Human Agency and Liberty:** AI must empower users, not enfeeble them. No AI personhood. Clear labeling. No deceptive identities.
+*   **Responsibility and Accountability:** Developers and deployers must be legally liable for harms caused by their systems.
+
+This is not a separate fight—it is the same struggle we encode into our zomes every day.
+
+👉 **[Read and endorse the Pro-Human AI Declaration](https://humanstatement.org)** – add your name to this global movement for accountable, human-centered AI.
+
+> *"Artificial intelligence should serve humanity, not the reverse."*
+
+--- struct Event {
     pub id: EntryHash,
     pub event_type: EventType,
     pub action: String, // "plant", "harvest", "pay", "certify"
@@ -354,7 +620,25 @@ pub struct Event {
     pub mrv_id: Option<EntryHash>, // Link to MRV evidence
     pub commitment_id: Option<EntryHash>,
     pub metadata: String,
-    pub header: String,
+   ## 🤝 A Human-Centered AI Future: The Pro-Human Declaration
+
+The technology we build must remain under human control. This is not just a technical preference—it is a fundamental principle of **Agent Sovereignty** (Article I).
+
+In March 2026, a remarkably broad coalition—including Nobel laureates, labor unions, faith leaders, and technologists—united behind **[The Pro-Human AI Declaration](https://humanstatement.org)**. Its core principles resonate deeply with our own:
+
+*   **Keeping Humans in Charge:** Human control is non-negotiable. AI must amplify, not replace, human potential.
+*   **Avoiding Concentration of Power:** We reject AI monopolies that stifle innovation and threaten democratic governance.
+*   **Protecting the Human Experience:** AI must not supplant family, community, and the foundational relationships that give life meaning.
+*   **Human Agency and Liberty:** AI must empower users, not enfeeble them. No AI personhood. Clear labeling. No deceptive identities.
+*   **Responsibility and Accountability:** Developers and deployers must be legally liable for harms caused by their systems.
+
+This is not a separate fight—it is the same struggle we encode into our zomes every day.
+
+👉 **[Read and endorse the Pro-Human AI Declaration](https://humanstatement.org)** – add your name to this global movement for accountable, human-centered AI.
+
+> *"Artificial intelligence should serve humanity, not the reverse."*
+
+--- pub header: String,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -379,7 +663,25 @@ pub struct Commitment {
     pub status: CommitmentStatus,
     pub header: String,
 }
+## 🤝 A Human-Centered AI Future: The Pro-Human Declaration
 
+The technology we build must remain under human control. This is not just a technical preference—it is a fundamental principle of **Agent Sovereignty** (Article I).
+
+In March 2026, a remarkably broad coalition—including Nobel laureates, labor unions, faith leaders, and technologists—united behind **[The Pro-Human AI Declaration](https://humanstatement.org)**. Its core principles resonate deeply with our own:
+
+*   **Keeping Humans in Charge:** Human control is non-negotiable. AI must amplify, not replace, human potential.
+*   **Avoiding Concentration of Power:** We reject AI monopolies that stifle innovation and threaten democratic governance.
+*   **Protecting the Human Experience:** AI must not supplant family, community, and the foundational relationships that give life meaning.
+*   **Human Agency and Liberty:** AI must empower users, not enfeeble them. No AI personhood. Clear labeling. No deceptive identities.
+*   **Responsibility and Accountability:** Developers and deployers must be legally liable for harms caused by their systems.
+
+This is not a separate fight—it is the same struggle we encode into our zomes every day.
+
+👉 **[Read and endorse the Pro-Human AI Declaration](https://humanstatement.org)** – add your name to this global movement for accountable, human-centered AI.
+
+> *"Artificial intelligence should serve humanity, not the reverse."*
+
+---
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub enum CommitmentStatus {
     Active, Fulfilled, Expired, Cancelled,
@@ -1142,10 +1444,10 @@ Dragon Dreaming phases are complete (all 4 phases present)
 🔁 Pull Request Process & Checklist
 PR Template
 markdown
-## Description
+Description
 Briefly describe your changes, referencing relevant white paper sections.
 
-## Related White Paper Sections
+Related White Paper Sections
 - [ ] Section 5 (Access Covenant)
 - [ ] Section 6 (HSI)
 - [ ] Section 7 (Ravel)
@@ -1154,18 +1456,18 @@ Briefly describe your changes, referencing relevant white paper sections.
 - [ ] Appendix ___
 - [ ] Article ___
 
-## Type of Change
+Type of Change
 - [ ] Bug fix
 - [ ] New feature
 - [ ] Constitutional enforcement
 - [ ] Documentation
 
-## Testing
+Testing
 - [ ] I have added Tryorama tests
 - [ ] All tests pass locally
 - [ ] Constitutional compliance tests pass
 
-## Constitutional Checklist
+Constitutional Checklist
 - [ ] All extern functions call `ensure_covenant_accepted()`
 - [ ] No token represents direct ownership of life (Article II)
 - [ ] Planetary boundaries respected (Article III)
@@ -1175,7 +1477,7 @@ Briefly describe your changes, referencing relevant white paper sections.
 - [ ] Syntropic sovereignty header included in all new entries
 - [ ] Dragon Dreaming phases considered for project changes
 
-## Additional Notes
+Additional Notes
 Any trade-offs, mitigations, or context for reviewers.
 Review Process
 Technical review: Code quality, correctness, performance

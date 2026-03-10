@@ -1,3 +1,6 @@
-pub mod entries;
-pub mod validation;
-pub mod valueflows;
+use hdk::prelude::*;
+
+#[hdk_extern]
+fn init() -> ExternResult<InitCallbackResult> {
+    Ok(InitCallbackResult::Pass)
+}
